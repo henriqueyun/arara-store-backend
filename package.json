@@ -21,8 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:seed:all": "sequelize-cli db:seed:all",
     "db:migrate": "sequelize-cli db:migrate",
-    "db:create": "sequelize-cli db:create --env=development",
-    "db:drop": "sequelize-cli db:drop --env=development"
+    "db:create": "sequelize-cli db:create",
+    "db:drop": "sequelize-cli db:drop"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
