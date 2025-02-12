@@ -11,7 +11,6 @@ export class AddressService {
   ) {}
 
   async create(createAddressDto: CreateAddressDto) {
-    console.log(createAddressDto);
     return await this.addressRepository.create({ ...createAddressDto });
   }
 

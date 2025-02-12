@@ -19,13 +19,11 @@ export const databaseProviders = [
       let sequelize;
 
       if (process.env.DATABASE_URL) {
-        console.log('via DATABASE_URL');
         sequelize = new Sequelize(process.env.DATABASE_URL, {
           dialect: 'postgres',
           dialectOptions: { ssl: {} },
         });
       } else {
-        console.log('via params');
         sequelize = new Sequelize({
           dialect: 'postgres',
           host: 'localhost',
