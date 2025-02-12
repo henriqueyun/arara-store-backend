@@ -16,14 +16,24 @@ export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
-      const sequelize = new Sequelize({
-        dialect: 'mysql',
-        host: 'localhost',
-        port: 3308,
-        username: 'root',
-        password: 'root',
-        database: 'arara-store',
-      });
+      let sequelize;
+
+      if (process.env.DATABASE_URL) {
+        sequelize = new Sequelize(process.env.DATABASE_URL, {
+          dialect: 'postgres',
+          dialectOptions: { ssl: {} },
+        });
+      } else {
+        sequelize = new Sequelize({
+          dialect: 'postgres',
+          host: 'localhost',
+          port: 5432,
+          username: 'root',
+          password: 'root',
+          database: 'arara-store',
+        });
+      }
+
       sequelize.addModels([
         Admin,
         Address,
