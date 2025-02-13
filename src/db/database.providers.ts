@@ -11,28 +11,22 @@ import {
   User,
 } from '../modules/index.entities';
 import { Showcase } from '../modules/products/entities/showcase.entity';
+import * as DB_CONFIG from '../../config/config';
 
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
-      let sequelize;
-
-      if (process.env.DATABASE_URL) {
-        sequelize = new Sequelize(process.env.DATABASE_URL, {
-          dialect: 'postgres',
-          dialectOptions: { ssl: {} },
-        });
-      } else {
-        sequelize = new Sequelize({
+      const sequelize = new Sequelize(
+        DB_CONFIG[process.env.NODE_ENV] ?? {
           dialect: 'postgres',
           host: 'localhost',
           port: 5432,
           username: 'root',
           password: 'root',
           database: 'arara-store',
-        });
-      }
+        },
+      );
 
       sequelize.addModels([
         Admin,
